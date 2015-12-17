@@ -1,0 +1,181 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.15" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Используем VIM как редактор golang &middot; karamani </title>
+
+  
+  <link rel="stylesheet" href="http://karamani.ru/css/poole.css">
+  <link rel="stylesheet" href="http://karamani.ru/css/syntax.css">
+  <link rel="stylesheet" href="http://karamani.ru/css/hyde.css">
+  <link rel="stylesheet" href="http://karamani.ru/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="karamani" />
+</head>
+
+	<body class="theme-base-08">
+		<div class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="sidebar-about">
+            <a href="http://karamani.ru/"><h1>karamani</h1></a>
+            <p class="lead">
+                Размышления о проектировании и разработке программного обеспечения 
+            </p>
+        </div>
+        <a href="https://www.linkedin.com/in/karamani"><img class="sidebar-icon" alt="linkedin" src="/img/linkedin.png"/></a>
+        <a href="https://github.com/karamani"><img class="sidebar-icon" alt="github" src="/img/github.png"/></a>
+        <a href="https://twitter.com/ykaramani"><img class="sidebar-icon" alt="twitter" src="/img/twitter.png"/></a>
+		<div class="clear-float"></div>
+        <hr />
+        <ul class="sidebar-nav">
+        
+            <li><a href="/about/"> О сайте </a></li>
+        
+            <li><a href="/post/"> Блог </a></li>
+        
+        </ul>
+        <hr />
+        <p>&copy; 2015. All rights reserved.</p>
+    </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Используем VIM как редактор golang</h1>
+			  <span class="post-date">Tue, Dec 15, 2015</span>
+			      
+
+<p>Краткая инструкция по настройке VIM в качестве редактора golang-файлов.
+Не претендует на полноту изложения, но может стать отправной точкой на пути к среде разработки своей мечты.</p>
+
+<h2 id="устанавливаем-vim:140cbd5ccce65f598015d386e32d8c4c">Устанавливаем VIM</h2>
+
+<p>В интернете можно найти массу инструкций по установке <a href="http://www.vim.org/">VIM</a> на разные операционные системы.
+Нет смысла повторяться. Для меня вся установка уместилась в одну консольную команду.</p>
+
+<pre><code>$ sudo apt-get install vim vim-gtk
+</code></pre>
+
+<p>Если вы пользователь Ubuntu 15.04, то вам, скорее всего, тоже ничего больше не понадобится.</p>
+
+<p>Рекомендую сразу же добавить в VIM какую-нибудь популярную систему управления плагинами, т.к. на первых порах настривать многочисленные плагины придётся часто.
+Мне нравится <a href="https://github.com/VundleVim/Vundle.vim">Vundle</a>.</p>
+
+<p>Сначала клонируем репозиторий Vundle в папку с настройками VIM.</p>
+
+<pre><code>$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+</code></pre>
+
+<p>Затем создаём конфигурационный файл vim</p>
+
+<pre><code>$ touch ~/.vimrc
+</code></pre>
+
+<p>И добавляем в него следующие строки:</p>
+
+<pre><code>set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end() 
+           
+filetype plugin indent on
+</code></pre>
+
+<p>Выполняем</p>
+
+<pre><code>$ vim +PluginInstall +qall
+</code></pre>
+
+<p>Всё, Vundle установлен. Теперь каждый новый плагин нужно будет прописывать в файле настроек перед вызовом <code>vundle#end</code>.
+А после повторного выполнения <code>PluginInstall</code> новые плагины из файла конфигурации будут установлены в систему.</p>
+
+<h2 id="настраиваем-цвета-редактора:140cbd5ccce65f598015d386e32d8c4c">Настраиваем цвета редактора</h2>
+
+<p>Для VIM уже создано бесчисленное множество цветовых схем.
+Очень странно, если вам не удастся подобрать из всего предложенного многообразия что-то на свой вкус.</p>
+
+<p>Скачиваем какой-нибудь готовый набор цветовых схем. Например, отсюда:</p>
+
+<pre><code>$ git clone https://github.com/flazz/vim-colorschemes.git
+</code></pre>
+
+<p>Копируем содержимое папки <code>colors</code> из клонированного репозитория в папку <code>~/.vim/colors</code>.
+После этого, добавляем в файл <code>.vimrc</code> строку</p>
+
+<pre><code>colorscheme codeschool
+</code></pre>
+
+<p>Всесто <code>codeschool</code> можно вписать название любой понравившейся схемы.
+Название темы соотвествует названию файла из папки <code>colors</code>. Перезапускаем VIM - радуемся результату или идём на запись к окулисту.
+Существует плагин, позволяющий изменять цветовую схему не перегружая VIM, но реального применения я ему так и не нашел.
+Всё-таки настройка цветовой схемы - операция раховая. Настроил и забыл.</p>
+
+<h2 id="устанавливаем-плагин-поддержки-golang:140cbd5ccce65f598015d386e32d8c4c">Устанавливаем плагин поддержки golang</h2>
+
+<p>Собственно, всё, что нужно, установить плагин vim-go. В <code>.vimrc</code> добавляем строку</p>
+
+<pre><code>Plugin 'fatih/vim-go'
+</code></pre>
+
+<p>Выполняем команду <code>:PluginInstall</code>. Затем, <code>:GoInstallBinaries</code>. Внимательно читаем результат выполнения этой команды.
+Скорее всего, для корректной работы плагина придется доставить на компьютер часть стандартных инструментов Go.</p>
+
+<p>Со всеми функциями плагина знакомимся в <a href="https://github.com/fatih/vim-go">описании проекта</a> на github&rsquo;е.</p>
+
+<h2 id="управляем-файлами-не-выходя-из-редактора:140cbd5ccce65f598015d386e32d8c4c">Управляем файлами, не выходя из редактора</h2>
+
+<p>Для того, чтобы постоянно не переключаться в какой-либо файловый менеджер для открытия или создания файла,
+устанавливаем плагин <a href="https://github.com/scrooloose/nerdtree">NERDTree</a>. Этот плагин отображает в левой части окна VIM
+дерево каталогов с возможностью удобной навигации, открытия, создания и удаления файлов.</p>
+
+<p>Выполняем уже привычную операцию. Добавляем в <code>.vimrc</code> строку:</p>
+
+<pre><code>   Plugin 'scrooloose/nerdtree'
+</code></pre>
+
+<p>Добавим также открытие дерева каталогов в &ldquo;автозапуск&rdquo; VIM.</p>
+
+<pre><code>autocmd vimenter * NERDTree &quot; Открывать дерево каталогов при запуске VIM
+</code></pre>
+
+<p>Выполняем команду <code>PluginInstall</code>.</p>
+
+<h2 id="небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c">Небольшой тюнинг окна редактирования</h2>
+
+<p>Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.</p>
+
+<pre><code>set number &quot; показывать номера строк в редакторе
+set colorcolumn=120 &quot; вертикальная линия после 120 символов
+set tabstop=4 &quot; ширина табуляции
+set softtabstop=4 &quot; ширина таба при использовании всесто него пробелов
+</code></pre>
+
+<h2 id="результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c">Результат сегодняшней работы</h2>
+
+<p><a href="/img/vim-golang-img1_full.png"><img src="/img/vim-golang-img1_small.png" alt="VIM-Golang scr.1" /></a></p>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>

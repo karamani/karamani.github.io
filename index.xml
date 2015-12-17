@@ -6,16 +6,149 @@
     <description>Recent content on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 08 Dec 2015 01:04:00 +0400</lastBuildDate>
+    <lastBuildDate>Tue, 15 Dec 2015 16:28:39 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>about</title>
-      <link>http://karamani.ru/about/</link>
-      <pubDate>Tue, 08 Dec 2015 01:04:00 +0400</pubDate>
+      <title>Hugo - генератор статических файлов</title>
+      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
+      <pubDate>Tue, 15 Dec 2015 16:28:39 +0300</pubDate>
       
-      <guid>http://karamani.ru/about/</guid>
-      <description>&lt;p&gt;О сайте.&lt;/p&gt;
+      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
+      <description>
+
+&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
+
+&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
+И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
+лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь оп рироде - не используйте
+динамические сайты без необходимости.&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Используем VIM как редактор golang</title>
+      <link>http://karamani.ru/post/vim-golang-ide/</link>
+      <pubDate>Tue, 15 Dec 2015 11:27:28 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/vim-golang-ide/</guid>
+      <description>
+
+&lt;p&gt;Краткая инструкция по настройке VIM в качестве редактора golang-файлов.
+Не претендует на полноту изложения, но может стать отправной точкой на пути к среде разработки своей мечты.&lt;/p&gt;
+
+&lt;h2 id=&#34;устанавливаем-vim:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Устанавливаем VIM&lt;/h2&gt;
+
+&lt;p&gt;В интернете можно найти массу инструкций по установке &lt;a href=&#34;http://www.vim.org/&#34;&gt;VIM&lt;/a&gt; на разные операционные системы.
+Нет смысла повторяться. Для меня вся установка уместилась в одну консольную команду.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install vim vim-gtk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если вы пользователь Ubuntu 15.04, то вам, скорее всего, тоже ничего больше не понадобится.&lt;/p&gt;
+
+&lt;p&gt;Рекомендую сразу же добавить в VIM какую-нибудь популярную систему управления плагинами, т.к. на первых порах настривать многочисленные плагины придётся часто.
+Мне нравится &lt;a href=&#34;https://github.com/VundleVim/Vundle.vim&#34;&gt;Vundle&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Сначала клонируем репозиторий Vundle в папку с настройками VIM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Затем создаём конфигурационный файл vim&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch ~/.vimrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;И добавляем в него следующие строки:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin &#39;VundleVim/Vundle.vim&#39;
+
+call vundle#end() 
+           
+filetype plugin indent on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Выполняем&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vim +PluginInstall +qall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Всё, Vundle установлен. Теперь каждый новый плагин нужно будет прописывать в файле настроек перед вызовом &lt;code&gt;vundle#end&lt;/code&gt;.
+А после повторного выполнения &lt;code&gt;PluginInstall&lt;/code&gt; новые плагины из файла конфигурации будут установлены в систему.&lt;/p&gt;
+
+&lt;h2 id=&#34;настраиваем-цвета-редактора:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Настраиваем цвета редактора&lt;/h2&gt;
+
+&lt;p&gt;Для VIM уже создано бесчисленное множество цветовых схем.
+Очень странно, если вам не удастся подобрать из всего предложенного многообразия что-то на свой вкус.&lt;/p&gt;
+
+&lt;p&gt;Скачиваем какой-нибудь готовый набор цветовых схем. Например, отсюда:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/flazz/vim-colorschemes.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Копируем содержимое папки &lt;code&gt;colors&lt;/code&gt; из клонированного репозитория в папку &lt;code&gt;~/.vim/colors&lt;/code&gt;.
+После этого, добавляем в файл &lt;code&gt;.vimrc&lt;/code&gt; строку&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;colorscheme codeschool
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Всесто &lt;code&gt;codeschool&lt;/code&gt; можно вписать название любой понравившейся схемы.
+Название темы соотвествует названию файла из папки &lt;code&gt;colors&lt;/code&gt;. Перезапускаем VIM - радуемся результату или идём на запись к окулисту.
+Существует плагин, позволяющий изменять цветовую схему не перегружая VIM, но реального применения я ему так и не нашел.
+Всё-таки настройка цветовой схемы - операция раховая. Настроил и забыл.&lt;/p&gt;
+
+&lt;h2 id=&#34;устанавливаем-плагин-поддержки-golang:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Устанавливаем плагин поддержки golang&lt;/h2&gt;
+
+&lt;p&gt;Собственно, всё, что нужно, установить плагин vim-go. В &lt;code&gt;.vimrc&lt;/code&gt; добавляем строку&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Plugin &#39;fatih/vim-go&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Выполняем команду &lt;code&gt;:PluginInstall&lt;/code&gt;. Затем, &lt;code&gt;:GoInstallBinaries&lt;/code&gt;. Внимательно читаем результат выполнения этой команды.
+Скорее всего, для корректной работы плагина придется доставить на компьютер часть стандартных инструментов Go.&lt;/p&gt;
+
+&lt;p&gt;Со всеми функциями плагина знакомимся в &lt;a href=&#34;https://github.com/fatih/vim-go&#34;&gt;описании проекта&lt;/a&gt; на github&amp;rsquo;е.&lt;/p&gt;
+
+&lt;h2 id=&#34;управляем-файлами-не-выходя-из-редактора:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Управляем файлами, не выходя из редактора&lt;/h2&gt;
+
+&lt;p&gt;Для того, чтобы постоянно не переключаться в какой-либо файловый менеджер для открытия или создания файла,
+устанавливаем плагин &lt;a href=&#34;https://github.com/scrooloose/nerdtree&#34;&gt;NERDTree&lt;/a&gt;. Этот плагин отображает в левой части окна VIM
+дерево каталогов с возможностью удобной навигации, открытия, создания и удаления файлов.&lt;/p&gt;
+
+&lt;p&gt;Выполняем уже привычную операцию. Добавляем в &lt;code&gt;.vimrc&lt;/code&gt; строку:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   Plugin &#39;scrooloose/nerdtree&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Добавим также открытие дерева каталогов в &amp;ldquo;автозапуск&amp;rdquo; VIM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;autocmd vimenter * NERDTree &amp;quot; Открывать дерево каталогов при запуске VIM
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
+
+&lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
+set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
+set tabstop=4 &amp;quot; ширина табуляции
+set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Результат сегодняшней работы&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://karamani.ru/img/vim-golang-img1_full.png&#34;&gt;&lt;img src=&#34;http://karamani.ru/img/vim-golang-img1_small.png&#34; alt=&#34;VIM-Golang scr.1&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -25,7 +158,18 @@
       <pubDate>Sun, 06 Dec 2015 15:29:33 +0400</pubDate>
       
       <guid>http://karamani.ru/post/welcome/</guid>
-      <description>&lt;p&gt;Тестовая запись в блоге. Пробуем работать с хьюго. Если это круто, то так будем делать всегда.&lt;/p&gt;
+      <description>&lt;p&gt;Надцатая реинкарнация блога производится по нескольким причинам, но основная одна - я набрался опыта в разных новых штуках и у меня опять есть о чем писать.
+Попутно бложик переезжает с попсового Blogger&amp;rsquo;а на брутальный standalone.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>http://karamani.ru/about/</link>
+      <pubDate>Tue, 01 Dec 2015 22:04:11 +0400</pubDate>
+      
+      <guid>http://karamani.ru/about/</guid>
+      <description>&lt;p&gt;О сайте.&lt;/p&gt;
 </description>
     </item>
     

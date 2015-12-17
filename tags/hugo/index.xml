@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on karamani</title>
+    <link>http://karamani.ru/tags/hugo/</link>
+    <description>Recent content in Hugo on karamani</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <lastBuildDate>Tue, 15 Dec 2015 16:28:39 +0300</lastBuildDate>
+    <atom:link href="http://karamani.ru/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hugo - генератор статических файлов</title>
+      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
+      <pubDate>Tue, 15 Dec 2015 16:28:39 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
+      <description>
+
+&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
+
+&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
+И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
+лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь оп рироде - не используйте
+динамические сайты без необходимости.&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
