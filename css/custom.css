@@ -2,6 +2,10 @@
     clear: both;
 }
 
+.sidebar-iconbar {
+	text-align: center;
+}
+
 .sidebar-icon {
-    float: left;
+    display: inline-block;
 }
