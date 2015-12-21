@@ -21,7 +21,7 @@
 
 &lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
 И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
-лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь оп рироде - не используйте
+лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь о природе - не используйте
 динамические сайты без необходимости.&lt;/p&gt;
 
 &lt;p&gt;&amp;hellip;&lt;/p&gt;
@@ -37,7 +37,10 @@
       <description>
 
 &lt;p&gt;Краткая инструкция по настройке VIM в качестве редактора golang-файлов.
-Не претендует на полноту изложения, но может стать отправной точкой на пути к среде разработки своей мечты.&lt;/p&gt;
+Не претендует на полноту изложения, но может стать отправной точкой на пути к среде разработки своей мечты.
+В одну статью явно не вмещается, поэтому не буду и стараться. Сначала рассмотрим установку основных плагинов.
+потом добавим удобства в работе дополнительными плагинами и настройками, затем остановимся на каких-то интересных
+моментах подробнее.&lt;/p&gt;
 
 &lt;h2 id=&#34;устанавливаем-vim:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Устанавливаем VIM&lt;/h2&gt;
 
@@ -126,7 +129,7 @@ filetype plugin indent on
 
 &lt;p&gt;Выполняем уже привычную операцию. Добавляем в &lt;code&gt;.vimrc&lt;/code&gt; строку:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;   Plugin &#39;scrooloose/nerdtree&#39;
+&lt;pre&gt;&lt;code&gt;Plugin &#39;scrooloose/nerdtree&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Добавим также открытие дерева каталогов в &amp;ldquo;автозапуск&amp;rdquo; VIM.&lt;/p&gt;
@@ -134,7 +137,30 @@ filetype plugin indent on
 &lt;pre&gt;&lt;code&gt;autocmd vimenter * NERDTree &amp;quot; Открывать дерево каталогов при запуске VIM
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать &lt;code&gt;?&lt;/code&gt;.
+В открывшейся справке можно прочитать об основных функциях и горячих клавишах. Для закрытия справки нажимаем &lt;code&gt;?&lt;/code&gt; повторно.&lt;/p&gt;
+
+&lt;h2 id=&#34;автодополнение-кода:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Автодополнение кода&lt;/h2&gt;
+
+&lt;p&gt;Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
+Устанавливаем плагин &lt;a href=&#34;https://github.com/Shougo/neocomplete.vim&#34;&gt;neocomplete.vim&lt;/a&gt; и сразу добавляем его в автозагрузку.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Plugin &#39;Shougo/neocomplete&#39;
+...
+&amp;quot; neocomplete settings
+let g:neocomplete#enable_at_startup = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Рекомендую внимательно прочитать на странице плагина требования к версии VIM. Есть вариант, что редактор придётся обновить.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://karamani.ru/img/vim-golang-img2_full.png&#34;&gt;&lt;img src=&#34;http://karamani.ru/img/vim-golang-img2_small.png&#34; alt=&#34;VIM-Golang scr.1&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Настройки neocomplete - тема отдельной статьи. Пока что оставим всё по умолчанию. Единственное, сразу отключим
+назойливое окошко в верхней части экрана. Его добавляет не neocomplete, а VIM. В настройках редактора есть &amp;ldquo;режим завершения&amp;rdquo;,
+где указано сразу два режима - menu и preview. Menu оставляем, preview отключаем.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set completeopt-=preview
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
 
@@ -146,7 +172,47 @@ set tabstop=4 &amp;quot; ширина табуляции
 set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h2 id=&#34;горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Горячие клавиши&lt;/h2&gt;
+
+&lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
+типа сохранения файла, копирования, отмены действия и т.п.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL+s - сохранить файл
+nmap &amp;lt;C-s&amp;gt; :w&amp;lt;cr&amp;gt;
+vmap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
+imap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
+
+&amp;quot; CTRL-F4 - закрыть окно
+noremap &amp;lt;C-F4&amp;gt; &amp;lt;C-w&amp;gt;c
+inoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-o&amp;gt;&amp;lt;C-w&amp;gt;c
+cnoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;
+onoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;c
+
+&amp;quot; CTRL-x - вырезать
+vnoremap &amp;lt;C-x&amp;gt; &amp;quot;+x 
+&amp;quot; CTRL-c - копировать
+vnoremap &amp;lt;C-c&amp;gt; &amp;quot;+y
+&amp;quot; CTRL-V вставить под курсором
+map &amp;lt;C-v&amp;gt;      &amp;quot;+gP
+
+&amp;quot; CTRL-z - отмена действия
+noremap &amp;lt;C-z&amp;gt; u
+inoremap &amp;lt;C-z&amp;gt; &amp;lt;C-O&amp;gt;u
+&amp;quot; CTRL-y - вернуть отменённое назад
+noremap &amp;lt;C-y&amp;gt; &amp;lt;C-R&amp;gt;
+inoremap &amp;lt;C-y&amp;gt; &amp;lt;C-O&amp;gt;&amp;lt;C-R&amp;gt;
+
+&amp;quot; C(trl)+d - дублирование текущей строки
+imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
+
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Результат сегодняшней работы&lt;/h2&gt;
+
+&lt;p&gt;Тем, что мы собрали, уже можно пользоваться для программирования на go, но до совершенства, конечно, ещё очень далеко.
+Хочется быстрой навигации по коду, закладок, отладчика, проверки синтаксиса и т.д. и т.п. А VIM хорош как раз тем,
+что все эти желания осуществимы. К их осуществлению вернемся в следующих заметках. А после сегоднешней настройки у нас
+получилось примерно следующее.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://karamani.ru/img/vim-golang-img1_full.png&#34;&gt;&lt;img src=&#34;http://karamani.ru/img/vim-golang-img1_small.png&#34; alt=&#34;VIM-Golang scr.1&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
