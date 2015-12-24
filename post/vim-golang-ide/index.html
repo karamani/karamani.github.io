@@ -43,9 +43,9 @@
 		
         <ul class="sidebar-nav">
         
-            <li><a href="/about/"> О сайте </a></li>
-        
             <li><a href="/post/"> Блог </a></li>
+        
+            <li><a href="/about/"> О сайте </a></li>
         
         </ul>
     </div>
@@ -55,7 +55,8 @@
 	<div class="content container">
 		<div class="post">
 			<h1>Используем VIM как редактор golang</h1>
-			<span class="post-date">Tue, Dec 15, 2015</span>
+			<span class="post-date">Fri, Dec 18, 2015</span>
+			<div class="ya-share2 social-buttons" data-services="facebook,vkontakte,gplus,twitter,linkedin" data-counter=""></div>
 			
 
 <p>Краткая инструкция по настройке VIM в качестве редактора golang-файлов.
@@ -162,6 +163,16 @@ filetype plugin indent on
 <p>Выполняем команду <code>PluginInstall</code>. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать <code>?</code>.
 В открывшейся справке можно прочитать об основных функциях и горячих клавишах. Для закрытия справки нажимаем <code>?</code> повторно.</p>
 
+<h2 id="небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c">Небольшой тюнинг окна редактирования</h2>
+
+<p>Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.</p>
+
+<pre><code>set number &quot; показывать номера строк в редакторе
+set colorcolumn=120 &quot; вертикальная линия после 120 символов
+set tabstop=4 &quot; ширина табуляции
+set softtabstop=4 &quot; ширина таба при использовании всесто него пробелов
+</code></pre>
+
 <h2 id="автодополнение-кода:140cbd5ccce65f598015d386e32d8c4c">Автодополнение кода</h2>
 
 <p>Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
@@ -184,16 +195,6 @@ let g:neocomplete#enable_at_startup = 1
 <pre><code>set completeopt-=preview
 </code></pre>
 
-<h2 id="небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c">Небольшой тюнинг окна редактирования</h2>
-
-<p>Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.</p>
-
-<pre><code>set number &quot; показывать номера строк в редакторе
-set colorcolumn=120 &quot; вертикальная линия после 120 символов
-set tabstop=4 &quot; ширина табуляции
-set softtabstop=4 &quot; ширина таба при использовании всесто него пробелов
-</code></pre>
-
 <h2 id="горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c">Горячие клавиши</h2>
 
 <p>Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
@@ -214,7 +215,7 @@ onoremap &lt;C-F4&gt; &lt;C-c&gt;&lt;C-w&gt;c
 vnoremap &lt;C-x&gt; &quot;+x 
 &quot; CTRL-c - копировать
 vnoremap &lt;C-c&gt; &quot;+y
-&quot; CTRL-V вставить под курсором
+&quot; CTRL-V вставить
 map &lt;C-v&gt;      &quot;+gP
 
 &quot; CTRL-z - отмена действия
@@ -224,7 +225,7 @@ inoremap &lt;C-z&gt; &lt;C-O&gt;u
 noremap &lt;C-y&gt; &lt;C-R&gt;
 inoremap &lt;C-y&gt; &lt;C-O&gt;&lt;C-R&gt;
 
-&quot; C(trl)+d - дублирование текущей строки
+&quot; CTRL-d - дублирование текущей строки
 imap &lt;C-d&gt; &lt;esc&gt;yypi
 
 </code></pre>
@@ -239,8 +240,6 @@ imap &lt;C-d&gt; &lt;esc&gt;yypi
 <p><a href="/img/vim-golang-img1_full.png"><img src="/img/vim-golang-img1_small.png" alt="VIM-Golang scr.2" /></a></p>
 
 		</div>
-
-		<div class="ya-share2" data-services="facebook,vkontakte,gplus,twitter,linkedin" data-counter=""></div>
 
 		
 			<h2>Comments</h2>
@@ -272,7 +271,6 @@ imap &lt;C-d&gt; &lt;esc&gt;yypi
 
   ga('create', 'UA-71686715-1', 'auto');
   ga('send', 'pageview');
-
 </script>		
 </body>
 </html>

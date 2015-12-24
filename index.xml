@@ -6,32 +6,13 @@
     <description>Recent content on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 15 Dec 2015 16:28:39 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 18 Dec 2015 11:27:28 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Hugo - генератор статических файлов</title>
-      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
-      <pubDate>Tue, 15 Dec 2015 16:28:39 +0300</pubDate>
-      
-      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
-      <description>
-
-&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
-
-&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
-И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
-лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь о природе - не используйте
-динамические сайты без необходимости.&lt;/p&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Используем VIM как редактор golang</title>
       <link>http://karamani.ru/post/vim-golang-ide/</link>
-      <pubDate>Tue, 15 Dec 2015 11:27:28 +0300</pubDate>
+      <pubDate>Fri, 18 Dec 2015 11:27:28 +0300</pubDate>
       
       <guid>http://karamani.ru/post/vim-golang-ide/</guid>
       <description>
@@ -140,6 +121,16 @@ filetype plugin indent on
 &lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать &lt;code&gt;?&lt;/code&gt;.
 В открывшейся справке можно прочитать об основных функциях и горячих клавишах. Для закрытия справки нажимаем &lt;code&gt;?&lt;/code&gt; повторно.&lt;/p&gt;
 
+&lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
+
+&lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
+set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
+set tabstop=4 &amp;quot; ширина табуляции
+set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;автодополнение-кода:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Автодополнение кода&lt;/h2&gt;
 
 &lt;p&gt;Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
@@ -162,16 +153,6 @@ let g:neocomplete#enable_at_startup = 1
 &lt;pre&gt;&lt;code&gt;set completeopt-=preview
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
-
-&lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
-set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
-set tabstop=4 &amp;quot; ширина табуляции
-set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;h2 id=&#34;горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Горячие клавиши&lt;/h2&gt;
 
 &lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
@@ -192,7 +173,7 @@ onoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;c
 vnoremap &amp;lt;C-x&amp;gt; &amp;quot;+x 
 &amp;quot; CTRL-c - копировать
 vnoremap &amp;lt;C-c&amp;gt; &amp;quot;+y
-&amp;quot; CTRL-V вставить под курсором
+&amp;quot; CTRL-V вставить
 map &amp;lt;C-v&amp;gt;      &amp;quot;+gP
 
 &amp;quot; CTRL-z - отмена действия
@@ -202,7 +183,7 @@ inoremap &amp;lt;C-z&amp;gt; &amp;lt;C-O&amp;gt;u
 noremap &amp;lt;C-y&amp;gt; &amp;lt;C-R&amp;gt;
 inoremap &amp;lt;C-y&amp;gt; &amp;lt;C-O&amp;gt;&amp;lt;C-R&amp;gt;
 
-&amp;quot; C(trl)+d - дублирование текущей строки
+&amp;quot; CTRL-d - дублирование текущей строки
 imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
 
 &lt;/code&gt;&lt;/pre&gt;
@@ -219,13 +200,46 @@ imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
     </item>
     
     <item>
-      <title>welcome</title>
+      <title>Hugo - генератор статических файлов</title>
+      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
+      <pubDate>Tue, 15 Dec 2015 23:28:39 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
+      <description>
+
+&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
+
+&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
+И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
+лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь о природе - не используйте
+динамические сайты без необходимости.&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Welcome</title>
       <link>http://karamani.ru/post/welcome/</link>
-      <pubDate>Sun, 06 Dec 2015 15:29:33 +0400</pubDate>
+      <pubDate>Sat, 12 Dec 2015 20:29:33 +0400</pubDate>
       
       <guid>http://karamani.ru/post/welcome/</guid>
-      <description>&lt;p&gt;Надцатая реинкарнация блога производится по нескольким причинам, но основная одна - я набрался опыта в разных новых штуках и у меня опять есть о чем писать.
-Попутно бложик переезжает с попсового Blogger&amp;rsquo;а на брутальный standalone.&lt;/p&gt;
+      <description>&lt;p&gt;Надцатая реинкарнация блога производится по нескольким причинам, но основная одна - я набрался опыта в разных новых штуках,
+и, как следствие, у меня опять есть о чем писать. Попутно бложик переезжает с попсового Blogger&amp;rsquo;а на брутальный standalone.&lt;/p&gt;
+
+&lt;p&gt;Нынешний перечень интересов:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Архитектура высоконагруженных проектов (highload и иже с ним)&lt;/li&gt;
+&lt;li&gt;Golang&lt;/li&gt;
+&lt;li&gt;Big Data&lt;/li&gt;
+&lt;li&gt;Docker-контейнеры и кластера&lt;/li&gt;
+&lt;li&gt;Управление процессом разработки ПО&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Плюс никуда не девается большой рабочий опыт с Php и MySql.&lt;/p&gt;
+
+&lt;p&gt;Этим темам постараюсь сейчас уделять основное внимание, но, со временем, список интересов, конечно, может измениться.&lt;/p&gt;
 </description>
     </item>
     

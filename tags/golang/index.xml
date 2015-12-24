@@ -6,13 +6,13 @@
     <description>Recent content in Golang on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 15 Dec 2015 11:27:28 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 18 Dec 2015 11:27:28 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Используем VIM как редактор golang</title>
       <link>http://karamani.ru/post/vim-golang-ide/</link>
-      <pubDate>Tue, 15 Dec 2015 11:27:28 +0300</pubDate>
+      <pubDate>Fri, 18 Dec 2015 11:27:28 +0300</pubDate>
       
       <guid>http://karamani.ru/post/vim-golang-ide/</guid>
       <description>
@@ -121,6 +121,16 @@ filetype plugin indent on
 &lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать &lt;code&gt;?&lt;/code&gt;.
 В открывшейся справке можно прочитать об основных функциях и горячих клавишах. Для закрытия справки нажимаем &lt;code&gt;?&lt;/code&gt; повторно.&lt;/p&gt;
 
+&lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
+
+&lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
+set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
+set tabstop=4 &amp;quot; ширина табуляции
+set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h2 id=&#34;автодополнение-кода:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Автодополнение кода&lt;/h2&gt;
 
 &lt;p&gt;Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
@@ -143,16 +153,6 @@ let g:neocomplete#enable_at_startup = 1
 &lt;pre&gt;&lt;code&gt;set completeopt-=preview
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
-
-&lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
-set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
-set tabstop=4 &amp;quot; ширина табуляции
-set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;h2 id=&#34;горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Горячие клавиши&lt;/h2&gt;
 
 &lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
@@ -173,7 +173,7 @@ onoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;c
 vnoremap &amp;lt;C-x&amp;gt; &amp;quot;+x 
 &amp;quot; CTRL-c - копировать
 vnoremap &amp;lt;C-c&amp;gt; &amp;quot;+y
-&amp;quot; CTRL-V вставить под курсором
+&amp;quot; CTRL-V вставить
 map &amp;lt;C-v&amp;gt;      &amp;quot;+gP
 
 &amp;quot; CTRL-z - отмена действия
@@ -183,7 +183,7 @@ inoremap &amp;lt;C-z&amp;gt; &amp;lt;C-O&amp;gt;u
 noremap &amp;lt;C-y&amp;gt; &amp;lt;C-R&amp;gt;
 inoremap &amp;lt;C-y&amp;gt; &amp;lt;C-O&amp;gt;&amp;lt;C-R&amp;gt;
 
-&amp;quot; C(trl)+d - дублирование текущей строки
+&amp;quot; CTRL-d - дублирование текущей строки
 imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
 
 &lt;/code&gt;&lt;/pre&gt;
