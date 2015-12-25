@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Curl on karamani</title>
+    <link>http://karamani.ru/tags/curl/</link>
+    <description>Recent content in Curl on karamani</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 14 Dec 2015 02:04:16 +0300</lastBuildDate>
+    <atom:link href="http://karamani.ru/tags/curl/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Curl, многомерные массивы и передача файлов</title>
+      <link>http://karamani.ru/post/php-curl-files/</link>
+      <pubDate>Mon, 14 Dec 2015 02:04:16 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/php-curl-files/</guid>
+      <description>&lt;p&gt;Задача: из кода на PHP передать веб-службе файл с помощью curl.&lt;/p&gt;
+
+&lt;p&gt;Решение стандартное и достаточно простое, но, как обычно, при программировании на PHP есть нюансы.&lt;/p&gt;
+
+&lt;p&gt;Инициализируем библиотеку curl, формируем данные для POST-запроса, одним из параметров устанавливаем путь к передаваемому файлу, который обязательно начинаем со значка &amp;ldquo;собаки&amp;rdquo;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$requestVars = array(
+    &#39;id&#39; =&amp;gt; 1234,
+    &#39;name&#39; =&amp;gt; &#39;log&#39;,
+    &#39;logfile&#39; =&amp;gt; &#39;@/tmp/test.log&#39;);
+
+$ch = curl_init(); 
+
+curl_setopt($ch, CURLOPT_URL, &#39;test.web.service.net&#39;);
+curl_setopt($ch, CURLOPT_POST, 1);
+
+curl_setopt($ch, CURLOPT_POSTFIELDS, $requestVars);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+$res = curl_exec($ch);
+
+curl_close($ch);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Смотрим на стороне веб-службы переменные $_POST и $_FILES.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$_POST: Array (
+    [id] =&amp;gt; 1234
+    [name] =&amp;gt; log
+)
+
+$_FILES: Array (
+    [logfile] =&amp;gt; Array (
+        [name] =&amp;gt; test.log
+        [type] =&amp;gt; application/octet-stream
+        [tmp_name] =&amp;gt; /tmp/phpfdWZF6
+        [error] =&amp;gt; 0
+        [size] =&amp;gt; 11
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Всё прошло отлично. Curl самостоятельно принял решение об использовании при передаче запроса алгоритма multipart/form-data и передал файл веб-службе.
+На её стороне файл сохранён с именем /tmp/phpfdWZF6.&lt;/p&gt;
+
+&lt;p&gt;Теперь попробуем изменить параметры запроса, добавив туда вложенные массивы.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$requestVars = array(
+    &#39;id&#39; =&amp;gt; array(1, 2, 3, 4),
+    &#39;name&#39; =&amp;gt; &#39;log&#39;,
+    &#39;logfile&#39; =&amp;gt; &#39;@/tmp/test.log&#39;); 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Файл веб-служба загрузила, а вот в переменной $_POST теперь некорректные данные.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$_POST: Array (
+    [id] =&amp;gt; Array
+    [name] =&amp;gt; log
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Проблема в том, что библиотека curl не умеет обрабатывать вложенные массивы, установленные в CURLOPT_POSTFIELDS.
+Она работает только с одноуровневыми массивами или строкам. Поэтому самое первое и очевидное решение - превратить массив в строку с помощью http_build_query.
+Пробуем.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($requestVars, &#39;&#39;, &#39;&amp;amp;&#39;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Параметры в $_POST передались как нужно, но теперь вообще не передался файл.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$_POST: Array (
+    [id] =&amp;gt; Array (
+        [0] =&amp;gt; 1
+        [1] =&amp;gt; 2
+        [2] =&amp;gt; 3
+        [3] =&amp;gt; 4
+    )
+    [name] =&amp;gt; log
+    [logfile] =&amp;gt; @/tmp/test.log
+)
+
+$_FILES: Array ( )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Т.к. параметры запроса были переданы строкой, то библиотека curl проявила интеллект и начала использовать алгоритм передачи данных application/x-www-form-urlencoded,
+который не имеет даже теоретической возможности передачи файла. Продолжаем борьбу. Устанавливаем принудительно в заголовках запроса нужный нам тип контента.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$headers[] = &amp;quot;Content-type: multipart/form-data&amp;quot;;
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;После этого у нас вообще перестаёт работать отправка запроса. Ни параметры запроса, ни файл веб-служба не получает.
+А всё потому, что начиная с PHP версии 5.2.0 при передаче файлов с префиксом &amp;ldquo;@&amp;rdquo; значение в CURLOPT_POSTFIELDS обязательно должно быть массивом.
+С одной стороны, чтобы передать многоуровневый массив, нам нужна строка. С другой стороны, для передачи файла нужен массив.&lt;/p&gt;
+
+&lt;p&gt;Решение, как обычно, посередине. Строим одноуровневый массив с такими ключами, какими они были бы при формировании строки.
+Т.е. приводим наши параметры к такому виду.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$requestVars = array(
+    &#39;id[0]&#39; =&amp;gt; 1, 
+    &#39;id[1]&#39; =&amp;gt; 2, 
+    &#39;id[3]&#39; =&amp;gt; 3, 
+    &#39;id[4]&#39; =&amp;gt; 4,
+    &#39;name&#39; =&amp;gt; &#39;log&#39;,
+    &#39;logfile&#39; =&amp;gt; &#39;@/tmp/test.log&#39;); 
+
+curl_setopt($ch, CURLOPT_POSTFIELDS, $requestVars);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;И вот теперь мы, наконец-то, получили то, что хотели.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$_POST: Array (
+    [id] =&amp;gt; Array (
+        [0] =&amp;gt; 1
+        [1] =&amp;gt; 2
+        [3] =&amp;gt; 3
+        [4] =&amp;gt; 4
+    )
+    [name] =&amp;gt; log
+)
+
+$_FILES: Array (
+    [logfile] =&amp;gt; Array (
+        [name] =&amp;gt; test.log
+        [type] =&amp;gt; application/octet-stream
+        [tmp_name] =&amp;gt; /tmp/phpfdWZF6
+        [error] =&amp;gt; 0
+        [size] =&amp;gt; 11
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Осталось написать универсальное решение, которое бы преобразовывало любые многоуровневые массивы в одноуровневые.
+Тут на помощь приходит простенькая рекурсия.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;function convertToStringArray(
+        $inputKey, $inputArray, &amp;amp;$resultArray) {
+
+    foreach ($inputArray as $key =&amp;gt; $value) {
+        $tmpKey = (bool)$inputKey ? $inputKey.&amp;quot;[$key]&amp;quot; : $key;
+        if (is_array($value)) {
+            convertToStringArray($tmpKey, $value, $resultArray);
+        } else {
+            $resultArray[$tmpKey] = $value;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Тестируем последний раз.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$requestVars = array(
+    &#39;id&#39; =&amp;gt; array(1, 2, 3, 4),
+    &#39;name&#39; =&amp;gt; &#39;log&#39;,
+    &#39;logfile&#39; =&amp;gt; &#39;@/tmp/test.log&#39;);
+
+$resultArray = array();
+convertToStringArray(&#39;&#39;, $requestVars, $resultArray);
+$requestVars = $resultArray;
+
+$ch = curl_init(); 
+
+curl_setopt($ch, CURLOPT_URL, &#39;test.web.service.net&#39;);
+curl_setopt($ch, CURLOPT_POST, 1);
+
+curl_setopt($ch, CURLOPT_POSTFIELDS, $requestVars);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+
+$res = curl_exec($ch);
+
+curl_close($ch);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Убеждаемся, что всё работает, и отправляемся на поиски новых открытий в прекрасном и удивительном мире программирования на PHP.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
