@@ -6,8 +6,27 @@
     <description>Recent content in Development on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Fri, 18 Dec 2015 11:27:28 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 25 Dec 2015 23:28:39 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hugo - генератор статических файлов</title>
+      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
+      <pubDate>Fri, 25 Dec 2015 23:28:39 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
+      <description>
+
+&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
+
+&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
+И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
+лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь о природе - не используйте
+динамические сайты без необходимости.&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Используем VIM как редактор golang</title>
@@ -200,21 +219,120 @@ imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
     </item>
     
     <item>
-      <title>Hugo - генератор статических файлов</title>
-      <link>http://karamani.ru/post/hugo-static-site-builder/</link>
-      <pubDate>Tue, 15 Dec 2015 23:28:39 +0300</pubDate>
+      <title>Ссылки внутри цикла foreach в Php</title>
+      <link>http://karamani.ru/post/php-foreach/</link>
+      <pubDate>Tue, 15 Dec 2015 01:44:21 +0300</pubDate>
       
-      <guid>http://karamani.ru/post/hugo-static-site-builder/</guid>
-      <description>
+      <guid>http://karamani.ru/post/php-foreach/</guid>
+      <description>&lt;p&gt;Тот случай, когда php работает согласно спецификации, но вопреки здравому смыслу.&lt;/p&gt;
 
-&lt;h2 id=&#34;экологически-чистое-программирование:c26bbc0a484ae0c73f8e9da1291cfe12&#34;&gt;Экологически чистое программирование&lt;/h2&gt;
+&lt;p&gt;Ниже приведён пример отлично работающего кода:&lt;/p&gt;
 
-&lt;p&gt;Динамические сайты позволяют очень много. Часто слишком много. Часто слишком много ненужного и неиспользуемого.
-И за все неиспользуемые функции надо платить увеличением времени отклика, машинным временем, лишним электричеством,
-лишним нагревом процессоров иб как следствие, глобальным потеплением. Позаботьтесь о природе - не используйте
-динамические сайты без необходимости.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$list = array(1, 2, 3);
+foreach ($list as &amp;amp;$item) {
+    $item++;
+}
+print_r($list);
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Запускаем, получаем логичный вывод:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Array
+(
+    [0] =&amp;gt; 2
+    [1] =&amp;gt; 3
+    [2] =&amp;gt; 4
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;А теперь лёгким движением руки этот код превращается&amp;hellip; превращается&amp;hellip; в конструкцию со странным неочевидным функционалом.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$list = array(1, 2, 3);
+foreach ($list as &amp;amp;$item) {
+    $item++;
+}
+print_r($list);
+
+foreach ($list as $item) {
+    ;
+}
+print_r($list);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Мы всего лишь организовали второй цикл foreach по одному и тому массиву. И в этот раз &lt;code&gt;print_r&lt;/code&gt; выдал совсем иные результаты.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Array
+(
+    [0] =&amp;gt; 2
+    [1] =&amp;gt; 3
+    [2] =&amp;gt; 3
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Что же произошло? Собственно, ничего такого, чтобы мы сами не просили сделать PHP. В первом цикле мы объявили ссылку &amp;amp;$item, которая после завершения работы цикла указывает на элемент массива $list[2]. Далее мы пробегаемся ещё раз по массиву, на каждом шаге присваивая переменной $item очередное значение. Т.к. в PHP область видимости переменных не ограничивается блоком составного оператора, то переменная $item во втором цикле - это та же самая переменная из первого цикла. Поэтому, одновременно с установкой значения переменной $item, это же значение присваивается и элементу $list[2].&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Шаг 0: $item = $list[2] = $list[0] = 2&lt;/li&gt;
+&lt;li&gt;Шаг 1: $item = $list[2] = $list[1] = 3&lt;/li&gt;
+&lt;li&gt;Шаг 2: $item = $list[2] = $list[2] = 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Никаких ошибок нет, но получить-то мы хотели несколько другой результат. Есть несколько вариантов, чтобы обезопасить себя от таких неожиданностей. Первый вариант - никогда не забываем принудительно чистить переменные. Вот этот код всегда работает так, как задумано.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$list = array(1, 2, 3);
+foreach ($list as &amp;amp;$item) {
+    $item++;
+}
+print_r($list);
+
+unset($item); // !!!
+
+foreach ($list as $item) {
+    ;
+}
+print_r($list);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Второй вариант - для изменения элементов массива не используем ссылки, используем конструкцию $key =&amp;gt; $value. С ней также нет никаких проблем.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$list = array(1, 2, 3);
+foreach ($list as $key =&amp;gt; $item) {
+    $list[$key]++;
+}
+print_r($list);
+
+foreach ($list as $key =&amp;gt; $item) {
+    ;
+}
+print_r($list);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ну и самый правильный вариант, при котором мы не только избегаем описанной проблемы, но и многих других - максимально сокращаем область видимости переменных, выделяя логические части кода в отдельные функции. Этот вариант неплохо бы совмещать с одним из первых двух.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$list = array(1, 2, 3);
+
+$incrementList = function ($list) {
+    foreach ($list as $key =&amp;gt; $item) {
+        $list[$key]++;
+    }
+    return $list;
+};
+$list = $incrementList($list);
+print_r($list);
+
+$doList = function ($list) {
+    foreach ($list as $key =&amp;gt; $item) {
+        ;
+    }
+    return $list;
+};
+$list = $doList($list);
+print_r($list);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Здесь $item первого цикла и $item второго цикла - разные переменные.&lt;/p&gt;
+
+&lt;p&gt;Пишите на  PHP и прибудет с вами сила!&lt;/p&gt;
 </description>
     </item>
     
