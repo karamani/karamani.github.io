@@ -6,13 +6,13 @@
     <description>Recent content in Golang on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Fri, 18 Dec 2015 11:27:28 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 28 Dec 2015 21:27:28 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Используем VIM как редактор golang</title>
       <link>http://karamani.ru/post/vim-golang-ide/</link>
-      <pubDate>Fri, 18 Dec 2015 11:27:28 +0300</pubDate>
+      <pubDate>Mon, 28 Dec 2015 21:27:28 +0300</pubDate>
       
       <guid>http://karamani.ru/post/vim-golang-ide/</guid>
       <description>
@@ -120,6 +120,9 @@ filetype plugin indent on
 
 &lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать &lt;code&gt;?&lt;/code&gt;.
 В открывшейся справке можно прочитать об основных функциях и горячих клавишах. Для закрытия справки нажимаем &lt;code&gt;?&lt;/code&gt; повторно.&lt;/p&gt;
+
+&lt;p&gt;Особое внимание стоит обратить на команду &lt;code&gt;m&lt;/code&gt;. Из описания непонятно, что за меню будет вызвано. Но именно из этого меню
+происходит добавление и удаление файлов и папок.&lt;/p&gt;
 
 &lt;h2 id=&#34;небольшой-тюнинг-окна-редактирования:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Небольшой тюнинг окна редактирования&lt;/h2&gt;
 
