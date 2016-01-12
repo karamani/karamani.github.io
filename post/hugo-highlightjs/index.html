@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.15" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Подсветка синтаксиса в Hugo с помощью highlight.js &middot; karamani </title>
+
+  
+  <link rel="stylesheet" href="http://karamani.ru/css/poole.css">
+  <link rel="stylesheet" href="http://karamani.ru/css/syntax.css">
+  <link rel="stylesheet" href="http://karamani.ru/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="karamani" />
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="stylesheet" href="http://karamani.ru/css/custom.css">
+ 
+</head>
+
+<body class="theme-base-08">
+	<div class="sidebar">
+    <div class="container sidebar-sticky">
+        <div class="sidebar-about">
+            <a href="http://karamani.ru/"><h1>karamani</h1></a>
+            <p class="lead">
+                Размышления о проектировании и разработке программного обеспечения 
+            </p>
+        </div>
+		<div class="sidebar-iconbar">
+        <a href="https://www.linkedin.com/in/karamani"><img class="sidebar-icon" width="64" alt="linkedin" src="/img/linkedin.png"/></a>
+        <a href="https://github.com/karamani"><img class="sidebar-icon" width="64" alt="github" src="/img/github.png"/></a>
+        <a href="https://twitter.com/ykaramani"><img class="sidebar-icon" width="64" alt="twitter" src="/img/twitter.png"/></a>
+        <a href="https://plus.google.com/u/0/109740520561309811305"><img class="sidebar-icon" width="64" alt="google+" src="/img/google_plus.png"/></a>
+		</div>
+		
+        <ul class="sidebar-nav">
+        
+            <li><a href="/post/"> Блог </a></li>
+        
+            <li><a href="/about/"> О сайте </a></li>
+        
+        </ul>
+    </div>
+</div>
+
+
+	<div class="content container">
+		<div class="post">
+			<h1>Подсветка синтаксиса в Hugo с помощью highlight.js</h1>
+			<span class="post-date">Sun, Dec 27, 2015</span>
+			<div class="ya-share2 social-buttons" data-services="facebook,vkontakte,gplus,twitter,linkedin" data-counter=""></div>
+			<p>Для блога, посвященного программированию, подсветка синтаксиса кода - вещь строго обязательная.
+А учитывая, что готовых решений для этого предостаточно, не подключить что-то этакое себе на сайт всё равно, что плюнуть в карму.
+Пойдем по самому простому пути - подключим на клиентской стороне популярную библиотеку <a href="https://highlightjs.org/">highlight.js</a>.</p>
+
+<p>Как это принято в open source, инструкция по поключению highlight.js с сайта Hugo уже устарела.
+На каждой странице hugo-сайта нам надо добавить в заголовки новую версию библиотеки, а совсем не то, что рекомендует авто Hugo.</p>
+
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css&quot;&gt;
+&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
+</code></pre>
+
+<p>Я использую тему <a href="https://github.com/spf13/hyde">hyde</a>. Для неё нужно отредактировать файл <code>layouts/partials/head.html</code>.
+Если файла не существует, то его надо предварительно, до кастомизации, скопировать из темы <code>themes/hyde/layouts/partials/head.html</code>.
+Для других тем название файла заголовков может отличаться. Изучаем исходники.</p>
+
+<p>Вроде бы всё. Можем наслаждаться результатом. То, что помещено в блоки между тремя тильдами, будет стрательно раскрашено во все цвета радуги.</p>
+
+<p>Глаз радует, но, как всегда, остаётся пара вопросов.</p>
+
+<p>Во-первых, для темы hyde блоки кода отображаются с &ldquo;двойным бордюром&rdquo;, что разрушает гармонию.
+Во-вторых, а что делать с блоками кода, для которых не нужно ничего подсвечивать?
+Судьба которых быть скучными и унылыми.</p>
+
+<p>Для решения первой проблемы нужно переопределить стиль тега <code>&lt;pre&gt;</code>, т.к. его цвет по-умолчанию отличается от цвета, используемого highlight.js.
+Создаём файл стилей <code>static/css/custom.css</code>, прописываем его в head.html <em>после</em> подключения highlight.js, добавляем стиль.</p>
+
+<pre><code class="language-css">pre {
+	background-color: #f0f0f0;	
+}
+</code></pre>
+
+<p>От лишнего &ldquo;бордюра&rdquo; избавились. Теперь он окрашен в тот же цвет, что и блок <code>code</code> внутри.</p>
+
+<p>Для отключения подсветки добавляем к тильдам ключевое слово <code>nohighlight</code>.</p>
+
+<pre><code>~~~nohighlight
+// блок, синтаксис которого не будем подсвечивать
+~~~
+</code></pre>
+
+<p>Аналогично с отключением синтаксиса можно указать конкретный язык для подсветки, т.к. highlight.js далеко не всегда корректно определяет используемый язык.
+Например:</p>
+
+<pre><code>~~~php
+// здесь блок php-кода
+~~~
+</code></pre>
+
+		</div>
+
+		
+			<h2>Comments</h2>
+			<div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'karamani'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+
+		<p>&copy; 2016. All rights reserved.</p>
+	</div>
+		
+<script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8" async="async"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71686715-1', 'auto');
+  ga('send', 'pageview');
+</script>		
+</body>
+</html>
