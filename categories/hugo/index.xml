@@ -6,8 +6,65 @@
     <description>Recent content in Hugo on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Fri, 25 Dec 2015 23:28:39 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 27 Dec 2015 01:28:39 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Подсветка синтаксиса в Hugo с помощью highlight.js</title>
+      <link>http://karamani.ru/post/hugo-highlightjs/</link>
+      <pubDate>Sun, 27 Dec 2015 01:28:39 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/hugo-highlightjs/</guid>
+      <description>&lt;p&gt;Для блога, посвященного программированию, подсветка синтаксиса кода - вещь строго обязательная.
+А учитывая, что готовых решений для этого предостаточно, не подключить что-то этакое себе на сайт всё равно, что плюнуть в карму.
+Пойдем по самому простому пути - подключим на клиентской стороне популярную библиотеку &lt;a href=&#34;https://highlightjs.org/&#34;&gt;highlight.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Как это принято в open source, инструкция по поключению highlight.js с сайта Hugo уже устарела.
+На каждой странице hugo-сайта нам надо добавить в заголовки новую версию библиотеки, а совсем не то, что рекомендует авто Hugo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Я использую тему &lt;a href=&#34;https://github.com/spf13/hyde&#34;&gt;hyde&lt;/a&gt;. Для неё нужно отредактировать файл &lt;code&gt;layouts/partials/head.html&lt;/code&gt;.
+Если файла не существует, то его надо предварительно, до кастомизации, скопировать из темы &lt;code&gt;themes/hyde/layouts/partials/head.html&lt;/code&gt;.
+Для других тем название файла заголовков может отличаться. Изучаем исходники.&lt;/p&gt;
+
+&lt;p&gt;Вроде бы всё. Можем наслаждаться результатом. То, что помещено в блоки между тремя тильдами, будет стрательно раскрашено во все цвета радуги.&lt;/p&gt;
+
+&lt;p&gt;Глаз радует, но, как всегда, остаётся пара вопросов.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, для темы hyde блоки кода отображаются с &amp;ldquo;двойным бордюром&amp;rdquo;, что разрушает гармонию.
+Во-вторых, а что делать с блоками кода, для которых не нужно ничего подсвечивать?
+Судьба которых быть скучными и унылыми.&lt;/p&gt;
+
+&lt;p&gt;Для решения первой проблемы нужно переопределить стиль тега &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt;, т.к. его цвет по-умолчанию отличается от цвета, используемого highlight.js.
+Создаём файл стилей &lt;code&gt;static/css/custom.css&lt;/code&gt;, прописываем его в head.html &lt;em&gt;после&lt;/em&gt; подключения highlight.js, добавляем стиль.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;pre {
+	background-color: #f0f0f0;	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;От лишнего &amp;ldquo;бордюра&amp;rdquo; избавились. Теперь он окрашен в тот же цвет, что и блок &lt;code&gt;code&lt;/code&gt; внутри.&lt;/p&gt;
+
+&lt;p&gt;Для отключения подсветки добавляем к тильдам ключевое слово &lt;code&gt;nohighlight&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~~~nohighlight
+// блок, синтаксис которого не будем подсвечивать
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Аналогично с отключением синтаксиса можно указать конкретный язык для подсветки, т.к. highlight.js далеко не всегда корректно определяет используемый язык.
+Например:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~~~php
+// здесь блок php-кода
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Hugo - генератор статических файлов</title>

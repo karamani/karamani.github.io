@@ -28,7 +28,7 @@
 &lt;p&gt;В интернете можно найти массу инструкций по установке &lt;a href=&#34;http://www.vim.org/&#34;&gt;VIM&lt;/a&gt; на разные операционные системы.
 Нет смысла повторяться. Для меня вся установка уместилась в одну консольную команду.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ sudo apt-get install vim vim-gtk
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo apt-get install vim vim-gtk
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Если вы пользователь Ubuntu 15.04, то вам, скорее всего, тоже ничего больше не понадобится.&lt;/p&gt;
@@ -38,17 +38,17 @@
 
 &lt;p&gt;Сначала клонируем репозиторий Vundle в папку с настройками VIM.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Затем создаём конфигурационный файл vim&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ touch ~/.vimrc
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ touch ~/.vimrc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;И добавляем в него следующие строки:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;set nocompatible
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -158,10 +158,10 @@ let g:neocomplete#enable_at_startup = 1
 &lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
 типа сохранения файла, копирования, отмены действия и т.п.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL+s - сохранить файл
-nmap &amp;lt;C-s&amp;gt; :w&amp;lt;cr&amp;gt;
-vmap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
-imap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
+&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL-s - сохранить файл
+noremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; :update&amp;lt;CR&amp;gt;
+vnoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-C&amp;gt;:update&amp;lt;CR&amp;gt;
+inoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-O&amp;gt;:update&amp;lt;CR&amp;gt;
 
 &amp;quot; CTRL-F4 - закрыть окно
 noremap &amp;lt;C-F4&amp;gt; &amp;lt;C-w&amp;gt;c
@@ -169,12 +169,13 @@ inoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-o&amp;gt;&amp;lt;C-w&amp;gt;c
 cnoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;
 onoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;c
 
-&amp;quot; CTRL-x - вырезать
-vnoremap &amp;lt;C-x&amp;gt; &amp;quot;+x 
-&amp;quot; CTRL-c - копировать
-vnoremap &amp;lt;C-c&amp;gt; &amp;quot;+y
-&amp;quot; CTRL-V вставить
-map &amp;lt;C-v&amp;gt;      &amp;quot;+gP
+&amp;quot; SHIFT-Del - &amp;quot;вырезание&amp;quot; в системный буфер
+vnoremap &amp;lt;S-Del&amp;gt; &amp;quot;+x
+&amp;quot; CTRL-Insert - копирование в системный буфер
+vnoremap &amp;lt;C-Insert&amp;gt; &amp;quot;+y
+&amp;quot; SHIFT-Insert - вставка из системного буфера
+map &amp;lt;S-Insert&amp;gt;  &amp;quot;+gP
+cmap &amp;lt;S-Insert&amp;gt; &amp;lt;C-R&amp;gt;+
 
 &amp;quot; CTRL-z - отмена действия
 noremap &amp;lt;C-z&amp;gt; u
@@ -185,7 +186,6 @@ inoremap &amp;lt;C-y&amp;gt; &amp;lt;C-O&amp;gt;&amp;lt;C-R&amp;gt;
 
 &amp;quot; CTRL-d - дублирование текущей строки
 imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Результат сегодняшней работы&lt;/h2&gt;

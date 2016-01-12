@@ -6,8 +6,65 @@
     <description>Recent content in Development on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Fri, 25 Dec 2015 23:28:39 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 27 Dec 2015 01:28:39 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Подсветка синтаксиса в Hugo с помощью highlight.js</title>
+      <link>http://karamani.ru/post/hugo-highlightjs/</link>
+      <pubDate>Sun, 27 Dec 2015 01:28:39 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/hugo-highlightjs/</guid>
+      <description>&lt;p&gt;Для блога, посвященного программированию, подсветка синтаксиса кода - вещь строго обязательная.
+А учитывая, что готовых решений для этого предостаточно, не подключить что-то этакое себе на сайт всё равно, что плюнуть в карму.
+Пойдем по самому простому пути - подключим на клиентской стороне популярную библиотеку &lt;a href=&#34;https://highlightjs.org/&#34;&gt;highlight.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Как это принято в open source, инструкция по поключению highlight.js с сайта Hugo уже устарела.
+На каждой странице hugo-сайта нам надо добавить в заголовки новую версию библиотеки, а совсем не то, что рекомендует авто Hugo.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Я использую тему &lt;a href=&#34;https://github.com/spf13/hyde&#34;&gt;hyde&lt;/a&gt;. Для неё нужно отредактировать файл &lt;code&gt;layouts/partials/head.html&lt;/code&gt;.
+Если файла не существует, то его надо предварительно, до кастомизации, скопировать из темы &lt;code&gt;themes/hyde/layouts/partials/head.html&lt;/code&gt;.
+Для других тем название файла заголовков может отличаться. Изучаем исходники.&lt;/p&gt;
+
+&lt;p&gt;Вроде бы всё. Можем наслаждаться результатом. То, что помещено в блоки между тремя тильдами, будет стрательно раскрашено во все цвета радуги.&lt;/p&gt;
+
+&lt;p&gt;Глаз радует, но, как всегда, остаётся пара вопросов.&lt;/p&gt;
+
+&lt;p&gt;Во-первых, для темы hyde блоки кода отображаются с &amp;ldquo;двойным бордюром&amp;rdquo;, что разрушает гармонию.
+Во-вторых, а что делать с блоками кода, для которых не нужно ничего подсвечивать?
+Судьба которых быть скучными и унылыми.&lt;/p&gt;
+
+&lt;p&gt;Для решения первой проблемы нужно переопределить стиль тега &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt;, т.к. его цвет по-умолчанию отличается от цвета, используемого highlight.js.
+Создаём файл стилей &lt;code&gt;static/css/custom.css&lt;/code&gt;, прописываем его в head.html &lt;em&gt;после&lt;/em&gt; подключения highlight.js, добавляем стиль.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;pre {
+	background-color: #f0f0f0;	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;От лишнего &amp;ldquo;бордюра&amp;rdquo; избавились. Теперь он окрашен в тот же цвет, что и блок &lt;code&gt;code&lt;/code&gt; внутри.&lt;/p&gt;
+
+&lt;p&gt;Для отключения подсветки добавляем к тильдам ключевое слово &lt;code&gt;nohighlight&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~~~nohighlight
+// блок, синтаксис которого не будем подсвечивать
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Аналогично с отключением синтаксиса можно указать конкретный язык для подсветки, т.к. highlight.js далеко не всегда корректно определяет используемый язык.
+Например:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~~~php
+// здесь блок php-кода
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Hugo - генератор статических файлов</title>
@@ -47,7 +104,7 @@
 &lt;p&gt;В интернете можно найти массу инструкций по установке &lt;a href=&#34;http://www.vim.org/&#34;&gt;VIM&lt;/a&gt; на разные операционные системы.
 Нет смысла повторяться. Для меня вся установка уместилась в одну консольную команду.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ sudo apt-get install vim vim-gtk
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo apt-get install vim vim-gtk
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Если вы пользователь Ubuntu 15.04, то вам, скорее всего, тоже ничего больше не понадобится.&lt;/p&gt;
@@ -57,17 +114,17 @@
 
 &lt;p&gt;Сначала клонируем репозиторий Vundle в папку с настройками VIM.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Затем создаём конфигурационный файл vim&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ touch ~/.vimrc
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ touch ~/.vimrc
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;И добавляем в него следующие строки:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;set nocompatible
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -177,10 +234,10 @@ let g:neocomplete#enable_at_startup = 1
 &lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
 типа сохранения файла, копирования, отмены действия и т.п.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL+s - сохранить файл
-nmap &amp;lt;C-s&amp;gt; :w&amp;lt;cr&amp;gt;
-vmap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
-imap &amp;lt;C-s&amp;gt; &amp;lt;esc&amp;gt;:w&amp;lt;cr&amp;gt;i
+&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL-s - сохранить файл
+noremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; :update&amp;lt;CR&amp;gt;
+vnoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-C&amp;gt;:update&amp;lt;CR&amp;gt;
+inoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-O&amp;gt;:update&amp;lt;CR&amp;gt;
 
 &amp;quot; CTRL-F4 - закрыть окно
 noremap &amp;lt;C-F4&amp;gt; &amp;lt;C-w&amp;gt;c
@@ -188,12 +245,13 @@ inoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-o&amp;gt;&amp;lt;C-w&amp;gt;c
 cnoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;
 onoremap &amp;lt;C-F4&amp;gt; &amp;lt;C-c&amp;gt;&amp;lt;C-w&amp;gt;c
 
-&amp;quot; CTRL-x - вырезать
-vnoremap &amp;lt;C-x&amp;gt; &amp;quot;+x 
-&amp;quot; CTRL-c - копировать
-vnoremap &amp;lt;C-c&amp;gt; &amp;quot;+y
-&amp;quot; CTRL-V вставить
-map &amp;lt;C-v&amp;gt;      &amp;quot;+gP
+&amp;quot; SHIFT-Del - &amp;quot;вырезание&amp;quot; в системный буфер
+vnoremap &amp;lt;S-Del&amp;gt; &amp;quot;+x
+&amp;quot; CTRL-Insert - копирование в системный буфер
+vnoremap &amp;lt;C-Insert&amp;gt; &amp;quot;+y
+&amp;quot; SHIFT-Insert - вставка из системного буфера
+map &amp;lt;S-Insert&amp;gt;  &amp;quot;+gP
+cmap &amp;lt;S-Insert&amp;gt; &amp;lt;C-R&amp;gt;+
 
 &amp;quot; CTRL-z - отмена действия
 noremap &amp;lt;C-z&amp;gt; u
@@ -204,7 +262,6 @@ inoremap &amp;lt;C-y&amp;gt; &amp;lt;C-O&amp;gt;&amp;lt;C-R&amp;gt;
 
 &amp;quot; CTRL-d - дублирование текущей строки
 imap &amp;lt;C-d&amp;gt; &amp;lt;esc&amp;gt;yypi
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Результат сегодняшней работы&lt;/h2&gt;

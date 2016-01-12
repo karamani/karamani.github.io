@@ -23,8 +23,8 @@
   
   <link href="" rel="alternate" type="application/rss+xml" title="karamani" />
 
-  <link rel="stylesheet" href="https://yandex.st/highlightjs/8.0/styles/default.min.css">
-  <script src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
   <link rel="stylesheet" href="http://karamani.ru/css/custom.css">
@@ -76,7 +76,7 @@
 <p>В интернете можно найти массу инструкций по установке <a href="http://www.vim.org/">VIM</a> на разные операционные системы.
 Нет смысла повторяться. Для меня вся установка уместилась в одну консольную команду.</p>
 
-<pre><code>$ sudo apt-get install vim vim-gtk
+<pre><code class="language-bash">$ sudo apt-get install vim vim-gtk
 </code></pre>
 
 <p>Если вы пользователь Ubuntu 15.04, то вам, скорее всего, тоже ничего больше не понадобится.</p>
@@ -86,17 +86,17 @@
 
 <p>Сначала клонируем репозиторий Vundle в папку с настройками VIM.</p>
 
-<pre><code>$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
+<pre><code class="language-bash">$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 
 </code></pre>
 
 <p>Затем создаём конфигурационный файл vim</p>
 
-<pre><code>$ touch ~/.vimrc
+<pre><code class="language-bash">$ touch ~/.vimrc
 </code></pre>
 
 <p>И добавляем в него следующие строки:</p>
 
-<pre><code>set nocompatible
+<pre><code class="language-nohighlight">set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -206,10 +206,10 @@ let g:neocomplete#enable_at_startup = 1
 <p>Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
 типа сохранения файла, копирования, отмены действия и т.п.</p>
 
-<pre><code>&quot; CTRL+s - сохранить файл
-nmap &lt;C-s&gt; :w&lt;cr&gt;
-vmap &lt;C-s&gt; &lt;esc&gt;:w&lt;cr&gt;i
-imap &lt;C-s&gt; &lt;esc&gt;:w&lt;cr&gt;i
+<pre><code>&quot; CTRL-s - сохранить файл
+noremap &lt;silent&gt; &lt;C-S&gt; :update&lt;CR&gt;
+vnoremap &lt;silent&gt; &lt;C-S&gt; &lt;C-C&gt;:update&lt;CR&gt;
+inoremap &lt;silent&gt; &lt;C-S&gt; &lt;C-O&gt;:update&lt;CR&gt;
 
 &quot; CTRL-F4 - закрыть окно
 noremap &lt;C-F4&gt; &lt;C-w&gt;c
@@ -217,12 +217,13 @@ inoremap &lt;C-F4&gt; &lt;C-o&gt;&lt;C-w&gt;c
 cnoremap &lt;C-F4&gt; &lt;C-c&gt;&lt;C-w&gt;
 onoremap &lt;C-F4&gt; &lt;C-c&gt;&lt;C-w&gt;c
 
-&quot; CTRL-x - вырезать
-vnoremap &lt;C-x&gt; &quot;+x 
-&quot; CTRL-c - копировать
-vnoremap &lt;C-c&gt; &quot;+y
-&quot; CTRL-V вставить
-map &lt;C-v&gt;      &quot;+gP
+&quot; SHIFT-Del - &quot;вырезание&quot; в системный буфер
+vnoremap &lt;S-Del&gt; &quot;+x
+&quot; CTRL-Insert - копирование в системный буфер
+vnoremap &lt;C-Insert&gt; &quot;+y
+&quot; SHIFT-Insert - вставка из системного буфера
+map &lt;S-Insert&gt;  &quot;+gP
+cmap &lt;S-Insert&gt; &lt;C-R&gt;+
 
 &quot; CTRL-z - отмена действия
 noremap &lt;C-z&gt; u
@@ -233,7 +234,6 @@ inoremap &lt;C-y&gt; &lt;C-O&gt;&lt;C-R&gt;
 
 &quot; CTRL-d - дублирование текущей строки
 imap &lt;C-d&gt; &lt;esc&gt;yypi
-
 </code></pre>
 
 <h2 id="результат-сегодняшней-работы:140cbd5ccce65f598015d386e32d8c4c">Результат сегодняшней работы</h2>
@@ -265,7 +265,7 @@ imap &lt;C-d&gt; &lt;esc&gt;yypi
 </div>
 		
 
-		<p>&copy; 2015. All rights reserved.</p>
+		<p>&copy; 2016. All rights reserved.</p>
 	</div>
 		
 <script type="text/javascript" src="//yastatic.net/share2/share.js" charset="utf-8" async="async"></script>
