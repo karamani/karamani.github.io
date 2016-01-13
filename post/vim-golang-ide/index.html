@@ -111,7 +111,7 @@ filetype plugin indent on
 
 <p>Выполняем</p>
 
-<pre><code>$ vim +PluginInstall +qall
+<pre><code class="language-nohighlight">$ vim +PluginInstall +qall
 </code></pre>
 
 <p>Всё, Vundle установлен. Теперь каждый новый плагин нужно будет прописывать в файле настроек перед вызовом <code>vundle#end</code>.
@@ -124,13 +124,13 @@ filetype plugin indent on
 
 <p>Скачиваем какой-нибудь готовый набор цветовых схем. Например, отсюда:</p>
 
-<pre><code>$ git clone https://github.com/flazz/vim-colorschemes.git
+<pre><code class="language-bash">$ git clone https://github.com/flazz/vim-colorschemes.git
 </code></pre>
 
 <p>Копируем содержимое папки <code>colors</code> из клонированного репозитория в папку <code>~/.vim/colors</code>.
 После этого, добавляем в файл <code>.vimrc</code> строку</p>
 
-<pre><code>colorscheme codeschool
+<pre><code class="language-nohighlight">colorscheme codeschool
 </code></pre>
 
 <p>Всесто <code>codeschool</code> можно вписать название любой понравившейся схемы.
@@ -142,7 +142,7 @@ filetype plugin indent on
 
 <p>Собственно, всё, что нужно, установить плагин vim-go. В <code>.vimrc</code> добавляем строку</p>
 
-<pre><code>Plugin 'fatih/vim-go'
+<pre><code class="language-nohighlight">Plugin 'fatih/vim-go'
 </code></pre>
 
 <p>Выполняем команду <code>:PluginInstall</code>. Затем, <code>:GoInstallBinaries</code>. Внимательно читаем результат выполнения этой команды.
@@ -158,12 +158,12 @@ filetype plugin indent on
 
 <p>Выполняем уже привычную операцию. Добавляем в <code>.vimrc</code> строку:</p>
 
-<pre><code>Plugin 'scrooloose/nerdtree'
+<pre><code class="language-nohighlight">Plugin 'scrooloose/nerdtree'
 </code></pre>
 
 <p>Добавим также открытие дерева каталогов в &ldquo;автозапуск&rdquo; VIM.</p>
 
-<pre><code>autocmd vimenter * NERDTree &quot; Открывать дерево каталогов при запуске VIM
+<pre><code class="language-nohighlight">autocmd vimenter * NERDTree &quot; Открывать дерево каталогов при запуске VIM
 </code></pre>
 
 <p>Выполняем команду <code>PluginInstall</code>. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать <code>?</code>.
@@ -176,7 +176,7 @@ filetype plugin indent on
 
 <p>Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.</p>
 
-<pre><code>set number &quot; показывать номера строк в редакторе
+<pre><code class="language-nohighlight">set number &quot; показывать номера строк в редакторе
 set colorcolumn=120 &quot; вертикальная линия после 120 символов
 set tabstop=4 &quot; ширина табуляции
 set softtabstop=4 &quot; ширина таба при использовании всесто него пробелов
@@ -187,7 +187,7 @@ set softtabstop=4 &quot; ширина таба при использовании
 <p>Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
 Устанавливаем плагин <a href="https://github.com/Shougo/neocomplete.vim">neocomplete.vim</a> и сразу добавляем его в автозагрузку.</p>
 
-<pre><code>Plugin 'Shougo/neocomplete'
+<pre><code class="language-nohighlight">Plugin 'Shougo/neocomplete'
 ...
 &quot; neocomplete settings
 let g:neocomplete#enable_at_startup = 1
@@ -201,7 +201,7 @@ let g:neocomplete#enable_at_startup = 1
 назойливое окошко в верхней части экрана. Его добавляет не neocomplete, а VIM. В настройках редактора есть &ldquo;режим завершения&rdquo;,
 где указано сразу два режима - menu и preview. Menu оставляем, preview отключаем.</p>
 
-<pre><code>set completeopt-=preview
+<pre><code class="language-nohighlight">set completeopt-=preview
 </code></pre>
 
 <h2 id="горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c">Горячие клавиши</h2>
@@ -209,7 +209,7 @@ let g:neocomplete#enable_at_startup = 1
 <p>Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
 типа сохранения файла, копирования, отмены действия и т.п.</p>
 
-<pre><code>&quot; CTRL-s - сохранить файл
+<pre><code class="language-nohighlight">&quot; CTRL-s - сохранить файл
 noremap &lt;silent&gt; &lt;C-S&gt; :update&lt;CR&gt;
 vnoremap &lt;silent&gt; &lt;C-S&gt; &lt;C-C&gt;:update&lt;CR&gt;
 inoremap &lt;silent&gt; &lt;C-S&gt; &lt;C-O&gt;:update&lt;CR&gt;

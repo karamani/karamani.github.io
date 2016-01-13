@@ -6,8 +6,60 @@
     <description>Recent content in Php on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 15 Dec 2015 01:44:21 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jan 2016 22:56:38 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Обязательные конструкторы в PHP</title>
+      <link>http://karamani.ru/post/php-constructors/</link>
+      <pubDate>Tue, 12 Jan 2016 22:56:38 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/php-constructors/</guid>
+      <description>&lt;p&gt;Перепечатка из моего старого блога. Проверялось на PHP 5.3. Как обстоят дела в более свежих версиях, ещё не проверял.&lt;/p&gt;
+
+&lt;p&gt;Объектно-ориентированное программирования в PHP такое&amp;hellip; объектно-ориентированное&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Пусть есть базовый класс BaseClass. Создаём его потомка - класс ChildClass. Создаём конструктор и &amp;ldquo;на автомате&amp;rdquo; вызываем конструктор базового класса.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class BaseClass { }
+
+class ChildClass extends BaseClass {
+    public function __construct() {
+        parent::__construct();
+        // какой-то код
+    }
+}
+
+$obj = new ChildClass();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если в базовом классе конструктор не объявлен явно, то мы рискуем получить сюрприз в виде &amp;ldquo;PHP Fatal error:  Cannot call constructor&amp;rdquo;.
+Чтобы избавиться от ошибки, либо не вызываем конструктор предка, что в большинстве случаев плохая практика, либо пишем пустой конструктор в базовом классе.&lt;/p&gt;
+
+&lt;p&gt;В коде ниже ошибка уже не появляется.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class BaseClass {
+    public function __construct() { }
+}
+
+class ChildClass extends BaseClass {
+    public function __construct() {
+        parent::__construct();
+        // какой-то код
+    }
+}
+
+$obj = new ChildClass();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Аналогичная ситуация с деструктором. Не хочешь проблем - пиши пустой метод. Мелкое неудобство, но не позволяет полностью скрыть реализацию базового класса.
+Всегда нужно смотреть в код и проверять наличие конструкторов/деструкторов. Отдельной интриги добавляют приватные конструкторы и деструкторы.&lt;/p&gt;
+
+&lt;p&gt;Причина такого поведения понятна. То, что в PHP называется конструктором, на самом деле - обычная функция инициализации.
+Но при этом абсолютно непонятно, что делать, чтобы не допускать связанных с этим ошибок.
+Остаётся быть внимательным, смириться и пользоваться тем, что есть.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Ссылки внутри цикла foreach в Php</title>

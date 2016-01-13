@@ -6,8 +6,60 @@
     <description>Recent content on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Mon, 28 Dec 2015 21:27:28 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jan 2016 22:56:38 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Обязательные конструкторы в PHP</title>
+      <link>http://karamani.ru/post/php-constructors/</link>
+      <pubDate>Tue, 12 Jan 2016 22:56:38 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/php-constructors/</guid>
+      <description>&lt;p&gt;Перепечатка из моего старого блога. Проверялось на PHP 5.3. Как обстоят дела в более свежих версиях, ещё не проверял.&lt;/p&gt;
+
+&lt;p&gt;Объектно-ориентированное программирования в PHP такое&amp;hellip; объектно-ориентированное&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Пусть есть базовый класс BaseClass. Создаём его потомка - класс ChildClass. Создаём конструктор и &amp;ldquo;на автомате&amp;rdquo; вызываем конструктор базового класса.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class BaseClass { }
+
+class ChildClass extends BaseClass {
+    public function __construct() {
+        parent::__construct();
+        // какой-то код
+    }
+}
+
+$obj = new ChildClass();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если в базовом классе конструктор не объявлен явно, то мы рискуем получить сюрприз в виде &amp;ldquo;PHP Fatal error:  Cannot call constructor&amp;rdquo;.
+Чтобы избавиться от ошибки, либо не вызываем конструктор предка, что в большинстве случаев плохая практика, либо пишем пустой конструктор в базовом классе.&lt;/p&gt;
+
+&lt;p&gt;В коде ниже ошибка уже не появляется.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;class BaseClass {
+    public function __construct() { }
+}
+
+class ChildClass extends BaseClass {
+    public function __construct() {
+        parent::__construct();
+        // какой-то код
+    }
+}
+
+$obj = new ChildClass();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Аналогичная ситуация с деструктором. Не хочешь проблем - пиши пустой метод. Мелкое неудобство, но не позволяет полностью скрыть реализацию базового класса.
+Всегда нужно смотреть в код и проверять наличие конструкторов/деструкторов. Отдельной интриги добавляют приватные конструкторы и деструкторы.&lt;/p&gt;
+
+&lt;p&gt;Причина такого поведения понятна. То, что в PHP называется конструктором, на самом деле - обычная функция инициализации.
+Но при этом абсолютно непонятно, что делать, чтобы не допускать связанных с этим ошибок.
+Остаётся быть внимательным, смириться и пользоваться тем, что есть.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Используем VIM как редактор golang</title>
@@ -63,7 +115,7 @@ filetype plugin indent on
 
 &lt;p&gt;Выполняем&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ vim +PluginInstall +qall
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;$ vim +PluginInstall +qall
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Всё, Vundle установлен. Теперь каждый новый плагин нужно будет прописывать в файле настроек перед вызовом &lt;code&gt;vundle#end&lt;/code&gt;.
@@ -76,13 +128,13 @@ filetype plugin indent on
 
 &lt;p&gt;Скачиваем какой-нибудь готовый набор цветовых схем. Например, отсюда:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/flazz/vim-colorschemes.git
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ git clone https://github.com/flazz/vim-colorschemes.git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Копируем содержимое папки &lt;code&gt;colors&lt;/code&gt; из клонированного репозитория в папку &lt;code&gt;~/.vim/colors&lt;/code&gt;.
 После этого, добавляем в файл &lt;code&gt;.vimrc&lt;/code&gt; строку&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;colorscheme codeschool
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;colorscheme codeschool
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Всесто &lt;code&gt;codeschool&lt;/code&gt; можно вписать название любой понравившейся схемы.
@@ -94,7 +146,7 @@ filetype plugin indent on
 
 &lt;p&gt;Собственно, всё, что нужно, установить плагин vim-go. В &lt;code&gt;.vimrc&lt;/code&gt; добавляем строку&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Plugin &#39;fatih/vim-go&#39;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;Plugin &#39;fatih/vim-go&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Выполняем команду &lt;code&gt;:PluginInstall&lt;/code&gt;. Затем, &lt;code&gt;:GoInstallBinaries&lt;/code&gt;. Внимательно читаем результат выполнения этой команды.
@@ -110,12 +162,12 @@ filetype plugin indent on
 
 &lt;p&gt;Выполняем уже привычную операцию. Добавляем в &lt;code&gt;.vimrc&lt;/code&gt; строку:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Plugin &#39;scrooloose/nerdtree&#39;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;Plugin &#39;scrooloose/nerdtree&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Добавим также открытие дерева каталогов в &amp;ldquo;автозапуск&amp;rdquo; VIM.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;autocmd vimenter * NERDTree &amp;quot; Открывать дерево каталогов при запуске VIM
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;autocmd vimenter * NERDTree &amp;quot; Открывать дерево каталогов при запуске VIM
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Выполняем команду &lt;code&gt;PluginInstall&lt;/code&gt;. Чтобы ознакомиться с командами NERDTree достаточно в его окне нажать &lt;code&gt;?&lt;/code&gt;.
@@ -128,7 +180,7 @@ filetype plugin indent on
 
 &lt;p&gt;Всесто описания каждой опции приведу небольшой кусок конфигурационного файла с комментариями.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;set number &amp;quot; показывать номера строк в редакторе
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;set number &amp;quot; показывать номера строк в редакторе
 set colorcolumn=120 &amp;quot; вертикальная линия после 120 символов
 set tabstop=4 &amp;quot; ширина табуляции
 set softtabstop=4 &amp;quot; ширина таба при использовании всесто него пробелов
@@ -139,7 +191,7 @@ set softtabstop=4 &amp;quot; ширина таба при использован
 &lt;p&gt;Тяжело представить современную IDE без функции автодополнения кода. Конечно, нам тоже хочется быть современными.
 Устанавливаем плагин &lt;a href=&#34;https://github.com/Shougo/neocomplete.vim&#34;&gt;neocomplete.vim&lt;/a&gt; и сразу добавляем его в автозагрузку.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;Plugin &#39;Shougo/neocomplete&#39;
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;Plugin &#39;Shougo/neocomplete&#39;
 ...
 &amp;quot; neocomplete settings
 let g:neocomplete#enable_at_startup = 1
@@ -153,7 +205,7 @@ let g:neocomplete#enable_at_startup = 1
 назойливое окошко в верхней части экрана. Его добавляет не neocomplete, а VIM. В настройках редактора есть &amp;ldquo;режим завершения&amp;rdquo;,
 где указано сразу два режима - menu и preview. Menu оставляем, preview отключаем.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;set completeopt-=preview
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;set completeopt-=preview
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;горячие-клавиши:140cbd5ccce65f598015d386e32d8c4c&#34;&gt;Горячие клавиши&lt;/h2&gt;
@@ -161,7 +213,7 @@ let g:neocomplete#enable_at_startup = 1
 &lt;p&gt;Есть смысл настроить дополнительные горячие клавиши для наиболее часто используемых операций,
 типа сохранения файла, копирования, отмены действия и т.п.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;quot; CTRL-s - сохранить файл
+&lt;pre&gt;&lt;code class=&#34;language-nohighlight&#34;&gt;&amp;quot; CTRL-s - сохранить файл
 noremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; :update&amp;lt;CR&amp;gt;
 vnoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-C&amp;gt;:update&amp;lt;CR&amp;gt;
 inoremap &amp;lt;silent&amp;gt; &amp;lt;C-S&amp;gt; &amp;lt;C-O&amp;gt;:update&amp;lt;CR&amp;gt;
