@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Log on karamani</title>
+    <link>http://karamani.ru/tags/log/</link>
+    <description>Recent content in Log on karamani</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <lastBuildDate>Fri, 22 Jan 2016 21:40:06 +0300</lastBuildDate>
+    <atom:link href="http://karamani.ru/tags/log/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Стандартизация работы с логами</title>
+      <link>http://karamani.ru/post/log-standard/</link>
+      <pubDate>Fri, 22 Jan 2016 21:40:06 +0300</pubDate>
+      
+      <guid>http://karamani.ru/post/log-standard/</guid>
+      <description>&lt;p&gt;Чем больше формализован процесс, тем меньше о нём надо думать. Поэтому, в первую очередь, хочется стандартизировать
+рутинные повторяющиеся операции. Ведение логов - один из первых кандидатов на стандартизацию. Размышлять при разработке
+каждого нового приложения, как мы будем вести в нем логи, - напрасно тратить время. От приложения к приложению меняется
+содержание логов, но не способы работы с ними.&lt;/p&gt;
+
+&lt;p&gt;Программистам на Go не нужно долго искать решение для логирования сообщений в разрабатываемых приложениях. Пакет &lt;code&gt;log&lt;/code&gt;
+доступен в базовой библиотеке. Подключаем, ы&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
