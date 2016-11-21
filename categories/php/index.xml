@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Php on karamani</title>
-    <link>http://karamani.ru/categories/php/</link>
+    <link>http://karamani.ru/categories/php/index.xml</link>
     <description>Recent content in Php on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Tue, 15 Dec 2015 01:44:21 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/categories/php/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -16,6 +15,8 @@
       
       <guid>http://karamani.ru/post/php-foreach/</guid>
       <description>&lt;p&gt;Тот случай, когда php работает согласно спецификации, но вопреки здравому смыслу.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Ниже приведён пример отлично работающего кода:&lt;/p&gt;
 
@@ -123,8 +124,7 @@ print_r($list);
 
 &lt;p&gt;Здесь $item первого цикла и $item второго цикла - разные переменные.&lt;/p&gt;
 
-&lt;p&gt;Пишите на  PHP и прибудет с вами сила!&lt;/p&gt;
-</description>
+&lt;p&gt;Пишите на  PHP и прибудет с вами сила!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -136,6 +136,8 @@ print_r($list);
       <description>&lt;p&gt;Задача: из кода на PHP передать веб-службе файл с помощью curl.&lt;/p&gt;
 
 &lt;p&gt;Решение стандартное и достаточно простое, но, как обычно, при программировании на PHP есть нюансы.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Инициализируем библиотеку curl, формируем данные для POST-запроса, одним из параметров устанавливаем путь к передаваемому файлу, который обязательно начинаем со значка &amp;ldquo;собаки&amp;rdquo;.&lt;/p&gt;
 
@@ -306,8 +308,7 @@ $res = curl_exec($ch);
 curl_close($ch);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Убеждаемся, что всё работает, и отправляемся на поиски новых открытий в прекрасном и удивительном мире программирования на PHP.&lt;/p&gt;
-</description>
+&lt;p&gt;Убеждаемся, что всё работает, и отправляемся на поиски новых открытий в прекрасном и удивительном мире программирования на PHP.&lt;/p&gt;</description>
     </item>
     
   </channel>

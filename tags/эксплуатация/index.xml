@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Эксплуатация on karamani</title>
-    <link>http://karamani.ru/tags/%D1%8D%D0%BA%D1%81%D0%BF%D0%BB%D1%83%D0%B0%D1%82%D0%B0%D1%86%D0%B8%D1%8F/</link>
+    <link>http://karamani.ru/tags/%D1%8D%D0%BA%D1%81%D0%BF%D0%BB%D1%83%D0%B0%D1%82%D0%B0%D1%86%D0%B8%D1%8F/index.xml</link>
     <description>Recent content in Эксплуатация on karamani</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru-ru</language>
-    <lastBuildDate>Fri, 22 Jan 2016 21:40:06 +0300</lastBuildDate>
     <atom:link href="http://karamani.ru/tags/%D1%8D%D0%BA%D1%81%D0%BF%D0%BB%D1%83%D0%B0%D1%82%D0%B0%D1%86%D0%B8%D1%8F/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -20,9 +19,10 @@
 каждого нового приложения, как мы будем вести в нем логи, - напрасно тратить время. От приложения к приложению меняется
 содержание логов, но не способы работы с ними.&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;
+
 &lt;p&gt;Программистам на Go не нужно долго искать решение для логирования сообщений в разрабатываемых приложениях. Пакет &lt;code&gt;log&lt;/code&gt;
-доступен в базовой библиотеке. Подключаем, ы&lt;/p&gt;
-</description>
+доступен в базовой библиотеке. Подключаем, ы&lt;/p&gt;</description>
     </item>
     
   </channel>
